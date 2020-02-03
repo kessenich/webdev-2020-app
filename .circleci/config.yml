@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/cicd-example-app
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:latest-browsers
     steps:
       - checkout
       - run:
@@ -19,14 +19,19 @@ jobs:
           paths:
             - node_modules
       - run:
-          name: Build
-          command: npm run build
+         name: Linting
+         command: npm run lint
       - run:
           name: Test
-          command: npm test
+          command: npm run test
+      - run:
+          name: Build
+          command: npm run build
       - store_artifacts:
           path: test-results.xml
-          prefix: tests
+      - store_artifacts:
+          path: /dist
+          destination: /app
 
 workflows:
   version: 2
