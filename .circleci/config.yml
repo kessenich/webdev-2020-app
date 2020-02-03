@@ -36,8 +36,22 @@ jobs:
           root: ~/cicd-example-app
           paths:
             - dist
+            - node_modules
+  deploy:
+    working_directory: ~/cicd-example-app
+    docker:
+      - image: circleci/node:latest-browsers
+    steps:
+      - attach_workspace:
+          at: ~/cicd-example-app
+      - run:
+          name: Firebase Deploy
+          command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
 workflows:
   version: 2
   build:
     jobs:
       - build
+      - deploy:
+          requires:
+            - build
