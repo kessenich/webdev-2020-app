@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  jenkins-docker:
+    image: 'docker:dind'
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+    volumes:
+      - 'jenkins-docker-certs:/certs/client'
+      - 'jenkins-data:/var/jenkins_home'
+      - '.:/home'
+    networks:
+      jenkins:
+        aliases:
+          - docker
+  jenkins-blueocean:
+    image: 'jenkinsci/blueocean:latest'
+    environment:
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_CERT_PATH: /certs/client
+      DOCKER_TLS_VERIFY: 1
+    ports:
+      - '8080:8080'
+      # - '50000:50000'
+    volumes:
+      - 'jenkins-docker-certs:/certs/client'
+      - 'jenkins-data:/var/jenkins_home'
+      - '.:/home'
+    networks:
+      - jenkins
+  npm-verdaccio:
+    image: 'verdaccio/verdaccio'
+    ports:
+      - 4873:4873
+    networks:
+      - jenkins
+volumes:
+  jenkins-docker-certs:
+  jenkins-data:
+networks:
+  jenkins:
