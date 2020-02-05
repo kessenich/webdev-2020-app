@@ -8,14 +8,12 @@ node {
             sh 'npm ci'
         }
 
-        parallel {
-            stage('Linting') {
-                sh 'npm run lint'
-            }
+        stage('Linting') {
+            sh 'npm run lint'
+        }
 
-            stage('Test') {
-                sh 'npm run test:ci'
-            }
+        stage('Test') {
+            sh 'npm run test:ci'
         }
 
         stage('Build') {
