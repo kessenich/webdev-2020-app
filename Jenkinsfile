@@ -3,7 +3,7 @@ node {
         checkout scm
     }
 
-    docker.image('node:lts').inside('-v npm:/root/.npm/_cacache') {
+    docker.image('circleci/node:latest-browsers').inside('-v npm:/root/.npm/_cacache') {
         stage('Install Dependencies') {
             sh 'npm ci'
         }
