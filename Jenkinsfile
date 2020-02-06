@@ -19,19 +19,19 @@ node {
         stage('Build') {
             sh 'npm run build'
         }
+    }
 
-        stage('Release') {
-            sh 'npm publish --registry http://localhost:4873'
+    stage('Release') {
+        sh 'npm publish'
+    }
+
+    stage('Deploy') {
+        input {
+            message "Should we continue?"
+            ok "Yes, we should."
         }
-
-        stage('Deploy') {
-            input {
-                message "Should we continue?"
-                ok "Yes, we should."
-            }
-            steps {
-                echo "Now I would deploy to production"
-            }
+        steps {
+            echo "Now I would deploy to production"
         }
     }
 }
