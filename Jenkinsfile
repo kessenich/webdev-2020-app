@@ -8,30 +8,34 @@ node {
             sh 'npm ci'
         }
 
-        stage('Linting') {
-            sh 'npm run lint'
+        parallel 'Linting': {
+            stage('Linting') {
+                sh 'npm run lint'
+            },
+            'Test': {
+                stage('Test') {
+                sh 'npm run test:ci'
+                }
+            },
+            'Build': {
+                stage('Build') {
+                    sh 'npm run build'
+                }
+            }
         }
 
-        stage('Test') {
-            sh 'npm run test:ci'
+        stage('Release') {
+            sh 'npm publish --registry localhost:4873'
         }
 
-        stage('Build') {
-            sh 'npm run build'
+        stage('Deploy') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+            }
+            steps {
+                sh 'firebase deploy --token $FIREBASE_TOKEN'
+            }
         }
-
-        // stage('Release') {
-        //     sh 'npm publish'
-        // }
-
-        // stage('Deploy') {
-        //     input {
-        //         message "Should we continue?"
-        //         ok "Yes, we should."
-        //     }
-        //     steps {
-        //         sh 'firebase deploy --token $FIREBASE_TOKEN'
-        //     }
-        // }
     }
 }
