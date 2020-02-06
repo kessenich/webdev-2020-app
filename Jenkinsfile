@@ -22,10 +22,7 @@ node {
     }
 
     stage('Deploy') {
-        input {
-            message "Should we continue?"
-            ok "Yes, we should."
-        }
+        input message 'Should we continue?'
         steps {
             echo "Now I would deploy to production"
         }
