@@ -19,15 +19,15 @@ node {
         stage('Build') {
             sh 'npm run build'
         }
+    }
 
-        stage('Deploy') {
-            input {
-                message "Should we continue?"
-                ok "Yes, we should."
-            }
-            steps {
-                echo "Now I would deploy to production"
-            }
+    stage('Deploy') {
+        input {
+            message "Should we continue?"
+            ok "Yes, we should."
+        }
+        steps {
+            echo "Now I would deploy to production"
         }
     }
 }
