@@ -28,12 +28,6 @@ services:
       - '.:/home'
     networks:
       - jenkins
-  npm-verdaccio:
-    image: 'verdaccio/verdaccio'
-    ports:
-      - 4873:4873
-    networks:
-      - jenkins
 volumes:
   jenkins-docker-certs:
   jenkins-data:
