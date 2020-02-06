@@ -21,7 +21,7 @@ node {
         }
 
         stage('Release') {
-            sh 'npm publish'
+            sh 'npm publish --registry http://localhost:4873'
         }
 
         stage('Deploy') {
