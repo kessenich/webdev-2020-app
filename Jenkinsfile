@@ -20,11 +20,4 @@ node {
             sh 'npm run build'
         }
     }
-
-    stage('Deploy') {
-        input message 'Should we continue?'
-        steps {
-            echo "Now I would deploy to production"
-        }
-    }
 }
