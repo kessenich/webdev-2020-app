@@ -12,11 +12,9 @@ node {
             stage('Linting') {
                 sh 'npm run lint'
             },
-            {
             stage('Test') {
                 sh 'npm run test:ci'
             },
-            {
             stage('Build') {
                 sh 'npm run build'
             }
