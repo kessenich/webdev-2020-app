@@ -21,7 +21,7 @@ node {
         }
 
         stage('Release') {
-            sh 'npm publish --registry localhost:4873'
+            sh 'npm publish'
         }
 
         stage('Deploy') {
@@ -30,7 +30,7 @@ node {
                 ok "Yes, we should."
             }
             steps {
-                sh 'firebase deploy --token $FIREBASE_TOKEN'
+                echo "Now I would deploy to production"
             }
         }
     }

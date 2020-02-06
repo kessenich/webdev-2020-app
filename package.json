@@ -1,6 +1,9 @@
 {
   "name": "cicd-example-app",
   "version": "0.0.0",
+  "publishConfig":{
+    "registry":"http://localhost:4873"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
