@@ -2,7 +2,7 @@
   "name": "cicd-example-app",
   "version": "0.0.0",
   "publishConfig":{
-    "registry":"http://localhost:4873"
+    "registry":"http://cicd-example-app_npm-verdaccio_1:4873"
   },
   "scripts": {
     "ng": "ng",
