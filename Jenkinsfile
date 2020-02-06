@@ -8,19 +8,17 @@ node {
             sh 'npm ci'
         }
 
-        parallel 'Linting': {
+        parallel {
             stage('Linting') {
                 sh 'npm run lint'
             },
-            'Test': {
-                stage('Test') {
+            {
+            stage('Test') {
                 sh 'npm run test:ci'
-                }
             },
-            'Build': {
-                stage('Build') {
-                    sh 'npm run build'
-                }
+            {
+            stage('Build') {
+                sh 'npm run build'
             }
         }
 
